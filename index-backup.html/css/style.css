@@ -1,0 +1,236 @@
+:root {
+  --paper: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+}
+
+.book-scene {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: min(95vw, 960px);
+  max-height: 90vh;
+  perspective: 2200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  background: transparent;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.45s ease;
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #ffffff;
+}
+
+.page.active {
+  pointer-events: auto;
+}
+
+.page.flipping {
+  z-index: 3000 !important;
+}
+
+.page.cover {
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.page.cover.faded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page .front,
+.page .back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.page .front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.page .back {
+  transform: rotateY(180deg);
+  z-index: 1;
+  background: #ffffff;
+}
+
+.page .front img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #ffffff;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(18vw, 132px);
+  height: min(18vw, 132px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.hotspot {
+  position: absolute;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  z-index: 6;
+}
+
+.hotspot.map {
+  left: 16.7%;
+  top: 68%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.presence {
+  left: 37.5%;
+  top: 69.5%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.gifts {
+  left: 59.5%;
+  top: 68%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.manual {
+  left: 22.5%;
+  top: 83.5%;
+  width: 16%;
+  height: 10%;
+}
+
+.hotspot.dress {
+  left: 52.5%;
+  top: 83.5%;
+  width: 16%;
+  height: 10%;
+}
+
+.music-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 300;
+}
+
+.music-button:focus {
+  outline: 2px solid #ffffff;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book-scene {
+    width: min(100%, 560px);
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+  }
+
+  .book {
+    width: 100%;
+    height: 100%;
+  }
+
+  .seal {
+    width: min(24vw, 96px);
+    height: min(24vw, 96px);
+  }
+
+  .music-button {
+    width: 46px;
+    height: 46px;
+    bottom: 12px;
+    right: 12px;
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    transition: none;
+  }
+}
