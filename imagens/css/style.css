@@ -1,0 +1,238 @@
+:root {
+  --shadow: rgba(0, 0, 0, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background-color: transparent;
+}
+
+.book-scene {
+  width: auto;
+  height: auto;
+  max-height: 90vh;
+  max-width: 100vw;
+  perspective: 2200px;
+}
+
+.book {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  background: transparent;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 0.45s ease;
+  opacity: 1;
+  pointer-events: none;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #ffffff;
+}
+
+.page.active {
+  pointer-events: auto;
+}
+
+.page.flipping {
+  z-index: 3000 !important;
+}
+
+.page.cover {
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.page.cover.faded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.page .front,
+.page .back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  background: #ffffff;
+}
+
+.page .front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.page .back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.page .front img {
+  backface-visibility: hidden;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+.page.active {
+  opacity: 1;
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(84px, 18vw, 132px);
+  height: clamp(84px, 18vw, 132px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.music-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.music-button:focus {
+  outline: 2px solid #ffffff;
+}
+
+.page.page4 .front {
+  position: relative;
+}
+
+.hotspot {
+  position: absolute;
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hotspot.map {
+  left: 16.7%;
+  top: 68%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.presence {
+  left: 37.5%;
+  top: 69.5%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.gifts {
+  left: 59.5%;
+  top: 68%;
+  width: 14%;
+  height: 11%;
+}
+
+.hotspot.manual {
+  left: 22.5%;
+  top: 83.5%;
+  width: 16%;
+  height: 10%;
+}
+
+.hotspot.dress {
+  left: 52.5%;
+  top: 83.5%;
+  width: 16%;
+  height: 10%;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book-scene {
+    width: min(100%, 560px);
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .book {
+    width: 100%;
+    height: 100%;
+  }
+
+  .seal {
+    width: clamp(72px, 24vw, 112px);
+    height: clamp(72px, 24vw, 112px);
+  }
+
+  .music-button {
+    width: 46px;
+    height: 46px;
+    bottom: 12px;
+    right: 12px;
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    transition: none;
+  }
+}
